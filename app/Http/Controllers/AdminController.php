@@ -183,6 +183,13 @@ class AdminController extends Controller
 
 
 
+    /* ------------------------- Edit Category ------------------------- */
+
+
+    /* +++++++++++++++++++++++++ Edit Category +++++++++++++++++++++++++ */
+
+
+
     public function admins()
     {
         return view('Admin.Admins.admins');
