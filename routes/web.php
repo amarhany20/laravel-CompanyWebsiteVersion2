@@ -71,19 +71,22 @@ Route::controller(AdminController::class)->prefix("admin")->name("admin.")->grou
 
 
 
-    Route::get('/projects', 'projects')->name("projects");
+    Route::prefix('projects')->name('projects.')->group(function () {
+
+        Route::get('', 'projects')->name("projects");
 
 
 
-    /* +++++++++++++++++++++++++ Create Project Routes +++++++++++++++++++++++++ */
+        /* +++++++++++++++++++++++++ Create Project Routes +++++++++++++++++++++++++ */
 
 
 
-    Route::get('/projects/create', 'createProject')->name("projects.create");
+        Route::get('create', 'createProject')->name("projects.create");
 
 
 
-    /* ------------------------- Create Project Routes ------------------------- */
+        /* ------------------------- Create Project Routes ------------------------- */
+    });
 
 
 
@@ -95,67 +98,70 @@ Route::controller(AdminController::class)->prefix("admin")->name("admin.")->grou
 
 
 
-    Route::get('/categories', 'categories')->name("categories");
+    Route::prefix('categories')->name('categories.')->group(function () {
+
+        Route::get('', 'categories')->name("categories");
 
 
 
-    /* +++++++++++++++++++++++++ Create a Category +++++++++++++++++++++++++ */
+        /* +++++++++++++++++++++++++ Create a Category +++++++++++++++++++++++++ */
 
 
 
-    Route::get('/categories/create', 'createCategory')->name("categories.create");
+        Route::get('create', 'createCategory')->name("create");
 
 
 
-    /* ------------------------- Create a Category ------------------------- */
+        /* ------------------------- Create a Category ------------------------- */
 
 
 
-    /* +++++++++++++++++++++++++ store a Category +++++++++++++++++++++++++ */
+        /* +++++++++++++++++++++++++ store a Category +++++++++++++++++++++++++ */
 
 
 
-    Route::post('/categories/store', 'storeCategory')->name("categories.store");
+        Route::post('store', 'storeCategory')->name("store");
 
 
 
-    /* ------------------------- store a Category ------------------------- */
+        /* ------------------------- store a Category ------------------------- */
 
 
 
-    /* +++++++++++++++++++++++++ Edit a Category +++++++++++++++++++++++++ */
+        /* +++++++++++++++++++++++++ Edit a Category +++++++++++++++++++++++++ */
 
 
 
-    Route::get('/categories/edit/{id}', 'editCategory')->name("categories.edit");
+        Route::get('edit/{id}', 'editCategory')->name("edit");
 
 
 
-    /* ------------------------- edit a Category ------------------------- */
+        /* ------------------------- edit a Category ------------------------- */
 
 
 
-    /* +++++++++++++++++++++++++ Update a Category +++++++++++++++++++++++++ */
+        /* +++++++++++++++++++++++++ Update a Category +++++++++++++++++++++++++ */
 
 
 
-    Route::put('/categories/update/{id}', 'updateCategory')->name("categories.update");
+        Route::put('update/{id}', 'updateCategory')->name("update");
 
 
 
-    /* ------------------------- Update a Category ------------------------- */
+        /* ------------------------- Update a Category ------------------------- */
 
 
 
-    /* +++++++++++++++++++++++++ Delete a Category +++++++++++++++++++++++++ */
+        /* +++++++++++++++++++++++++ Delete a Category +++++++++++++++++++++++++ */
 
 
 
-    Route::delete('/categories/delete/{id}', 'deleteCategory')->name("categories.delete");
+        Route::delete('/delete/{id}', 'deleteCategory')->name("delete");
 
 
 
-    /* ------------------------- Delete a Category ------------------------- */
+        /* ------------------------- Delete a Category ------------------------- */
+    });;
 
 
 
