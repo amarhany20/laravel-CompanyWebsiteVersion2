@@ -81,7 +81,19 @@ Route::controller(AdminController::class)->prefix("admin")->name("admin.")->grou
 
 
 
-        Route::get('create', 'createProject')->name("projects.create");
+        Route::get('create', 'createProject')->name("create");
+
+
+
+        /* ------------------------- Create Project Routes ------------------------- */
+
+
+
+        /* +++++++++++++++++++++++++ Create Project Routes +++++++++++++++++++++++++ */
+
+
+
+        Route::post('store', 'storeProject')->name("store");
 
 
 

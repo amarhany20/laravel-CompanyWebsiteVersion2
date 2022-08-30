@@ -223,7 +223,8 @@ class AdminController extends Controller
 
     public function createProject()
     {
-        return view('Admin.projects.createProject');
+        $categories = Category::all();
+        return view('Admin.projects.createProject',compact('categories'));
     }
 
 
@@ -238,23 +239,47 @@ class AdminController extends Controller
 
     public function storeProject(Request $request)
     {
+        $request->validate(
+            [
+                'category_id' => 'exists:categories,id'
+            ],
+            [
+                'category_id.exists' => 'teez',
+            ]
+        );
+        // dd($request->all());
+        // dd($request->input());
         $project = new Project();
-        $project->title = $request->title;
-        $project->subtitle = $request->title;
-        $project->content = $request->content;
-        $project->ar_title = $request->ar_title;
-        $project->ar_Subtitle = $request->ar_Subtitle;
-        $project->ar_content = $request->ar_content;
-        $project->date = $request->date;
-        $project->thumbnail_alt = $request->thumbnail_alt;
-        $project->thumbnail_ar_alt = $request->thumbnail_ar_alt;
-        $project->meta_title = $request->meta_title;
-        $project->meta_description = $request->meta_description;
-        $project->meta_ar_title = $request->meta_ar_title;
-        $project->meta_ar_description = $request->meta_ar_description;
 
-        $project->thumbnail = $request->thumbnail;
-        $project->category_id = $request->category_id; //Foriegn
+        $project->title = $request->title;
+        $project->lang2_title = $request->lang2_title;
+        $project->lang3_title = $request->lang3_title;
+
+        $project->subtitle = $request->subtitle;
+        $project->lang2_subtitle = $request->lang2_subtitle;
+        $project->lang3_subtitle = $request->lang3_subtitle;
+
+        $project->content = $request->content;
+        $project->lang2_Content = $request->lang2_Content;
+        $project->lang3_Content = $request->lang3_Content;
+
+        $project->category_id = $request->category_id;
+
+        $project->date = $request->date;
+
+        $project->thumbnail_url = "Empty for now";
+
+        $project->thumbnail_alt = $request->thumbnail_alt;
+        $project->lang2_thumbnail_alt = $request->lang2_thumbnail_alt;
+        $project->lang3_thumbnail_alt = $request->lang3_thumbnail_alt;
+
+        $project->meta_title = $request->meta_title;
+        $project->meta_title = $request->lang2_meta_Title;
+        $project->meta_title = $request->lang3_meta_Title;
+
+        $project->meta_description = $request->meta_description;
+        $project->meta_description = $request->lang2_meta_description;
+        $project->meta_description = $request->lang3_meta_description;
 
         $project->save();
         return redirect('/admin/projects')->with('status', 'Project has been created successfully');

@@ -1,13 +1,12 @@
 @extends('Admin.layout.admin_layout')
 
 @section('content')
-    @if (session('status'))
-        <div class="alert alert-success">
-            {{ session('status') }}
-        </div>
-    @endif
-
     <div class="container mt-3">
+        @if (session('status'))
+            <div class="alert alert-success">
+                {{ session('status') }}
+            </div>
+        @endif
         <h1 class="text-center mb-3">All Projects</h1>
 
         <div class="row">
