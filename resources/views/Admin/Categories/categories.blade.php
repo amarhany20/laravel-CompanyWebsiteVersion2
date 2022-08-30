@@ -32,7 +32,8 @@
                     <tr>
                         <th>ID</th>
                         <th>English Name</th>
-                        <th>Arabic Name</th>
+                        <th>Language 2 Name</th>
+                        <th>Language 3 Name</th>
                         <th>Edit | Delete</th>
 
                     </tr>
@@ -48,6 +49,7 @@
                             <th>{{ $category->id }}</th>
                             <td>{{ $category->name }}</td>
                             <td>{{ $category->lang2_Name }}</td>
+                            <td>{{ $category->lang3_Name }}</td>
                             <td>
                                 <a class="btn btn-light"
                                     href="{{ url('/admin/categories/edit/' . $category->id) }}">Edit</a>

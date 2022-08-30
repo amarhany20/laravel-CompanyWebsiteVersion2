@@ -34,8 +34,8 @@
             </div>
 
             <div class="mb-3">
-                <label for="categoryLang2Name" class="form-label"></label>
-                <input name="lang2_Name" required type="text" placeholder="أدخل اسم الفئة"
+                <label for="categoryLang2Name" class="form-label">Language 2 Name</label>
+                <input name="lang2_Name" required type="text" placeholder="Enter Language 2 Name"
                     value="{{ old('lang2_Name') }}" class="form-control" id="categoryLang2Name">
                 <div id="categoryNameHelp" class="form-text"></div>
                 @error('lang2_Name')
@@ -43,15 +43,15 @@
                 @enderror
             </div>
 
-            {{-- <div class="mb-3">
-                <label for="categoryLang3Name" class="form-label text-end d-block">language 3 name</label>
-                <input name="lang3_Name" required type="text" placeholder="language 3 name"
-                    value="{{ old('lang3_Name') }}" class="form-control text-end" id="categoryLang3Name">
+            <div class="mb-3">
+                <label for="categoryLang3Name" class="form-label ">Language 3 Name</label>
+                <input name="lang3_Name" required type="text" placeholder="Enter Language 3 Name"
+                    value="{{ old('lang3_Name') }}" class="form-control" id="categoryLang3Name">
                 <div id="categoryNameHelp" class="form-text"></div>
                 @error('lang3_Name')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
-            </div> --}}
+            </div>
 
             <div class="text-center mt-4">
                 <button type="submit" class="btn btn-primary">Submit</button>

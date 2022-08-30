@@ -106,8 +106,8 @@ class AdminController extends Controller
 
     public function categories()
     {
-        $categories = Category::paginate(2);
-        return view('Admin.Categories.categories',compact("categories"));
+        $categories = Category::paginate(10);
+        return view('Admin.Categories.categories', compact("categories"));
     }
 
 
@@ -150,14 +150,14 @@ class AdminController extends Controller
             [
                 'name' => 'required|max:100|unique:categories,name',
                 'lang2_Name' => 'required|max:100|unique:categories,lang2_Name',
-                'lang3_Name' => 'required|max:100|unique:categories,lang2_Name'
+                'lang3_Name' => 'required|max:100|unique:categories,lang3_Name'
                 // 'arName' => array('required','max:100', "regex:/^[\p{Arabic}\s\p{N}]+$/")
             ],
             [
-                'lang2_Name.max' => 'The max amount of characters for the arabic category name is 100!',
-                'lang2_Name.unique' => 'The Arabic category name is already used',
-                'lang3_Name.max' => 'The max amount of characters for the arabic category name is 100!',
-                'lang3_Name.unique' => 'The Arabic category name is already used'
+                'lang2_Name.max' => 'The max amount of characters for the language 2 category name is 100!',
+                'lang2_Name.unique' => 'The language 2 category name is already used',
+                'lang3_Name.max' => 'The max amount of characters for the language 3 category name is 100!',
+                'lang3_Name.unique' => 'The language 3 category name is already used'
             ]
         );
 
@@ -182,15 +182,26 @@ class AdminController extends Controller
 
 
 
-    /* +++++++++++++++++++++++++ Admins Page +++++++++++++++++++++++++ */
+
+
+
+    /* +++++++++++++++++++++++++ Edit Category +++++++++++++++++++++++++ */
+
+
+
+
+    public function selectCategoryForEdit()
+    {
+        return view('Admin.Admins.admins');
+    }
 
 
 
     /* ------------------------- Edit Category ------------------------- */
 
-    /* +++++++++++++++++++++++++ Edit Category +++++++++++++++++++++++++ */
 
 
+    /* +++++++++++++++++++++++++ Admins Page +++++++++++++++++++++++++ */
 
     public function admins()
     {
