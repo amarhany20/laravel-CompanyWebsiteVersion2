@@ -1,0 +1,157 @@
+/* ++++++++++++++++++++++++++++ HTML STYLE */
+
+html {
+    scroll-behavior: smooth;
+
+}
+
+
+/* ---------------------------- HTML STYLE  END */
+
+/* ++++++++++++++++++++++++++++ BODY STYLE */
+body {
+    /* background: url('../images/bg.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover; */
+
+    background: rgb(210, 210, 210);
+    background: linear-gradient(0deg, rgba(210, 210, 210, 1) 0%, rgba(247, 247, 247, 1) 46%, rgba(255, 255, 255, 1) 84%) no-repeat center center fixed;
+}
+
+/* ---------------------------- BODY STYLE  END */
+
+
+
+
+/* ++++++++++++++++++++++++++++ Carousel Styling - Start */
+.carousel img {
+    height: 75%;
+    max-height: 800px;
+    object-fit: cover;
+}
+
+#carousel-blur::after {
+    background-image: linear-gradient(to top, black 0%, transparent 100%);
+    bottom: 0;
+    content: "";
+    height: 200px;
+    left: 0;
+    position: absolute;
+    right: 0;
+}
+
+.carousel-caption {
+    z-index: 1;
+}
+
+/* ---------------------------- Carousel Styling - End */
+
+/* ++++++++++++++++++++++++++++ Auto Hide/Show Navbar  SOME NAVBAR STYLE*/
+
+#navbar {
+    position: fixed;
+    width: 100%;
+    /* Make it stick/fixed */
+    top: 0;
+    /* Stay on top */
+    display: block;
+    transition: top 0.3s;
+    /* Transition effect when sliding down (and up) */
+    z-index: 99;
+    background-color: rgba(33, 37, 41, 0.7) !important;
+    /* box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.7); */
+}
+
+/* ---------------------------- Auto Hide/Show Navbar  SOME NAVBAR STYLE END*/
+
+
+/* ++++++++++++++++++++++++++++ About Us CSS Start */
+.social-link {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+    border-radius: 50%;
+    transition: all 0.3s;
+    font-size: 0.9rem;
+}
+
+.social-link:hover,
+.social-link:focus {
+    background: #ddd;
+    text-decoration: none;
+    color: #555;
+}
+
+/* ---------------------------- About us CSS END */
+
+/* ++++++++++++++++++++++++++++ Contact us Accordion */
+#Contact-Accordion .accordion-collapse {
+    border: 0;
+}
+
+#Contact-Accordion .accordion-button:focus {
+    box-shadow: none;
+    border: none;
+}
+
+#Contact-Accordion .accordion-button:not(.collapsed) {
+    background: none;
+    color: #ff9800;
+    box-shadow: none;
+    border-bottom: none;
+}
+
+#Contact-Accordion .accordion-button::after {
+    width: auto;
+    height: auto;
+    content: "+";
+    font-size: 40px;
+    background-image: none;
+    font-weight: 100;
+    color: #1b6ce5;
+    transform: translateY(-4px);
+}
+
+#Contact-Accordion .accordion-button:not(.collapsed)::after {
+    width: auto;
+    height: auto;
+    background-image: none;
+    content: "-";
+    font-size: 48px;
+    transform: translate(-5px, -4px);
+    transform: rotate(0deg);
+}
+
+/* ---------------------------- Contact us Accordion */
+
+/* +++++++++++++++++++++++++ All Projects +++++++++++++++++++++++++ */
+
+#All-Projects .card {
+    margin: 5% 0%;
+}
+
+
+/* ------------------------- All Projects ------------------------- */
+
+
+/* +++++++++++++++++++++++++ Project Details +++++++++++++++++++++++++ */
+
+/* .thumb figure img {
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+    -webkit-transition: .3s ease-in-out;
+    transition: .3s ease-in-out;
+}
+
+.thumb figure:hover img {
+    -webkit-filter: grayscale(0);
+    filter: grayscale(0);
+} */
+
+/* ------------------------- Project Details ------------------------- */
