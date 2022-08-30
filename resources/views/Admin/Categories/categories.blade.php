@@ -41,7 +41,7 @@
                 <tbody>
                     @if ($categories->count() == 0)
                         <tr>
-                            <td colspan="5">No products to display.</td>
+                            <td colspan="5">No Categories to display.</td>
                         </tr>
                     @endif
                     @foreach ($categories as $category)

@@ -37,70 +37,6 @@ class AdminController extends Controller
 
 
 
-    /* +++++++++++++++++++++++++ Projects Menu +++++++++++++++++++++++++ */
-
-
-
-    public function projects()
-    {
-        return view('Admin.projects.projects');
-    }
-
-
-
-    /* ------------------------- Projects Menu ------------------------- */
-
-
-
-    /* +++++++++++++++++++++++++ Create a project page +++++++++++++++++++++++++ */
-
-
-
-    public function createProject()
-    {
-        return view('Admin.projects.createProject');
-    }
-
-
-
-    /* ------------------------- Create a project page ------------------------- */
-
-
-
-    /* +++++++++++++++++++++++++ Store Created Project +++++++++++++++++++++++++ */
-
-
-
-    public function storeProject(Request $request)
-    {
-        $project = new Project();
-        $project->title = $request->title;
-        $project->subtitle = $request->title;
-        $project->content = $request->content;
-        $project->ar_title = $request->ar_title;
-        $project->ar_Subtitle = $request->ar_Subtitle;
-        $project->ar_content = $request->ar_content;
-        $project->date = $request->date;
-        $project->thumbnail_alt = $request->thumbnail_alt;
-        $project->thumbnail_ar_alt = $request->thumbnail_ar_alt;
-        $project->meta_title = $request->meta_title;
-        $project->meta_description = $request->meta_description;
-        $project->meta_ar_title = $request->meta_ar_title;
-        $project->meta_ar_description = $request->meta_ar_description;
-
-        $project->thumbnail = $request->thumbnail;
-        $project->category_id = $request->category_id; //Foriegn
-
-        $project->save();
-        return redirect('/admin/projects')->with('status', 'Project has been created successfully');
-    }
-
-
-
-    /* ------------------------- Store Created Project ------------------------- */
-
-
-
     /* +++++++++++++++++++++++++ ALL CATEGORIES FUNCTIONS +++++++++++++++++++++++++ */
 
 
@@ -259,6 +195,81 @@ class AdminController extends Controller
 
 
     /* ------------------------- ALL CATEGORIES FUNCTIONS ------------------------- */
+
+
+
+    /* +++++++++++++++++++++++++ ALL PROJECTS FUNCTIONS +++++++++++++++++++++++++ */
+
+
+
+    /* +++++++++++++++++++++++++ Projects Menu +++++++++++++++++++++++++ */
+
+
+
+    public function projects()
+    {
+        $projects = Project::paginate(10);
+        return view('Admin.projects.projects', compact('projects'));
+    }
+
+
+
+    /* ------------------------- Projects Menu ------------------------- */
+
+
+    /* +++++++++++++++++++++++++ Create a project page +++++++++++++++++++++++++ */
+
+
+
+    public function createProject()
+    {
+        return view('Admin.projects.createProject');
+    }
+
+
+
+    /* ------------------------- Create a project page ------------------------- */
+
+
+
+    /* +++++++++++++++++++++++++ Store Created Project +++++++++++++++++++++++++ */
+
+
+
+    public function storeProject(Request $request)
+    {
+        $project = new Project();
+        $project->title = $request->title;
+        $project->subtitle = $request->title;
+        $project->content = $request->content;
+        $project->ar_title = $request->ar_title;
+        $project->ar_Subtitle = $request->ar_Subtitle;
+        $project->ar_content = $request->ar_content;
+        $project->date = $request->date;
+        $project->thumbnail_alt = $request->thumbnail_alt;
+        $project->thumbnail_ar_alt = $request->thumbnail_ar_alt;
+        $project->meta_title = $request->meta_title;
+        $project->meta_description = $request->meta_description;
+        $project->meta_ar_title = $request->meta_ar_title;
+        $project->meta_ar_description = $request->meta_ar_description;
+
+        $project->thumbnail = $request->thumbnail;
+        $project->category_id = $request->category_id; //Foriegn
+
+        $project->save();
+        return redirect('/admin/projects')->with('status', 'Project has been created successfully');
+    }
+
+
+
+    /* ------------------------- Store Created Project ------------------------- */
+
+
+
+
+
+
+    /* ------------------------- ALL Projects FUNCTIONS ------------------------- */
 
 
 

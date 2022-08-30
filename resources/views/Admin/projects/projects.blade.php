@@ -9,6 +9,7 @@
 
     <div class="container mt-3">
         <h1 class="text-center mb-3">All Projects</h1>
+
         <div class="row">
             <div class="col-sm-6 mb-3">
                 <div class="input-group">
@@ -35,9 +36,9 @@
                     <tr>
                         <th>ID</th>
                         <th>English Title</th>
-                        <th>Arabic Title</th>
-                        <th>English Category</th>
-                        <th>Arabic Category</th>
+                        <td>Language 2 Title</td>
+                        <td>Language 3 Title</td>
+                        <th>Category</th>
                         <th>Photos</th>
                         <th>Show | Hide</th>
                         <th>Edit | Delete</th>
@@ -45,24 +46,40 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th>ID</th>
-                        <td>Title 1</td>
-                        <td>العنوان الاول</td>
-                        <td>Category 1</td>
-                        <td>النوع الاول</td>
-                        <td><a class="btn btn-secondary" href="">Manage Photos</a></td>
-                        <td><a class="btn btn-secondary" href="">Show</a></td>
-                        <td>
-                            <a class="btn btn-light" href="">Edit</a>
-                            <a class="btn btn-danger" href="">Delete</a>
-                        </td>
-                    </tr>
+                    @if ($projects->count() == 0)
+                        <tr>
+                            <td colspan="8">No Projects to display.</td>
+                        </tr>
+                    @endif
+                    @foreach ($projects as $project)
+                        <tr>
+                            <th>{{ $project->id }}</th>
+                            <td>{{ $project->name }}</td>
+                            <td>{{ $project->lang2_Title }}</td>
+                            <td>{{ $project->lang3_Title }}</td>
+                            <td>{{ $project->category }}</td>
+                            <td><a class="btn btn-secondary" href="">Manage Photos</a></td>
+                            <td><a class="btn btn-secondary" href="">Show</a></td>
+                            <td>
+                                <a class="btn btn-light" href="{{ url('/admin/projects/edit/' . $project->id) }}">Edit</a>
+                                <form class="d-inline" action="{{ url('/admin/projects/delete/' . $project->id) }}"
+                                    method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <input type="submit"
+                                        onclick="return confirm('Are you sure you want to delete this project? It will delete all projects linked to it!');"
+                                        class="btn btn-danger" value="Delete">
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
                 <tfoot>
 
                 </tfoot>
             </table>
+            {{ $projects->links() }}
+
         </div>
     </div>
 @endsection
