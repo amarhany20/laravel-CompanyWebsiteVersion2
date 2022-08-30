@@ -5,9 +5,10 @@
 
 @section('content')
     <div class="container mt-3">
-        <h1 class="text-center mb-3">Create a Category</h1>
+        <h1 class="text-center mb-3">Edit Category</h1>
 
         <a class="btn btn-dark text-decoration-none mb-3" href="/admin/categories"><i class="bi bi-arrow-90deg-left"></i> Back</a>
+
 
         @if (session('status'))
             <div class="alert alert-success">
@@ -27,13 +28,14 @@
         @endif
 
 
-        <form method="POST" action="{{ url('admin/categories/store') }}">
+        <form method="POST" action="{{ url('admin/categories/update/' . $category->id) }}">
             @csrf
+            @method('PUT')
 
             <div class="mb-3">
                 <label for="categoryName" class="form-label">Name</label>
                 <input required name="name" placeholder="Enter the category Name" type="text"
-                    value="{{ old('name') }}" class="form-control" id="categoryName">
+                    value="{{ old('name', $category->name) }}" class="form-control" id="categoryName">
                 <div id="categoryNameHelp" class="form-text"></div>
                 @error('name')
                     <div class="text-danger">{{ $message }}</div>
@@ -42,8 +44,8 @@
 
             <div class="mb-3">
                 <label for="categoryLang2Name" class="form-label">Language 2 Name</label>
-                <input required name="lang2_Name" type="text" placeholder="Enter Language 2 Name" value="{{ old('lang2_Name') }}"
-                    class="form-control" id="categoryLang2Name">
+                <input required name="lang2_Name" type="text" placeholder="Enter Language 2 Name"
+                    value="{{ old('lang2_Name', $category->lang2_Name) }}" class="form-control" id="categoryLang2Name">
                 <div id="categoryNameHelp" class="form-text"></div>
                 @error('lang2_Name')
                     <div class="text-danger">{{ $message }}</div>
@@ -52,8 +54,8 @@
 
             <div class="mb-3">
                 <label for="categoryLang3Name" class="form-label ">Language 3 Name</label>
-                <input required name="lang3_Name" type="text" placeholder="Enter Language 3 Name" value="{{ old('lang3_Name') }}"
-                    class="form-control" id="categoryLang3Name">
+                <input required name="lang3_Name" type="text" placeholder="Enter Language 3 Name"
+                    value="{{ old('lang3_Name', $category->lang3_Name) }}" class="form-control" id="categoryLang3Name">
                 <div id="categoryNameHelp" class="form-text"></div>
                 @error('lang3_Name')
                     <div class="text-danger">{{ $message }}</div>

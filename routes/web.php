@@ -123,6 +123,30 @@ Route::controller(AdminController::class)->prefix("admin")->name("admin.")->grou
 
 
 
+    /* +++++++++++++++++++++++++ Edit a Category +++++++++++++++++++++++++ */
+
+
+
+    Route::get('/categories/edit/{id}', 'editCategory')->name("categories.edit");
+
+
+
+    /* ------------------------- edit a Category ------------------------- */
+
+
+
+    /* +++++++++++++++++++++++++ Update a Category +++++++++++++++++++++++++ */
+
+
+
+    Route::put('/categories/update/{id}', 'updateCategory')->name("categories.update");
+
+
+
+    /* ------------------------- Update a Category ------------------------- */
+
+
+
     /* ------------------------- categories Routes ------------------------- */
 
 

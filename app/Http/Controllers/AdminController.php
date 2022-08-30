@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
 use App\Models\Project;
+use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class AdminController extends Controller
 {
@@ -100,6 +101,10 @@ class AdminController extends Controller
 
 
 
+    /* +++++++++++++++++++++++++ ALL CATEGORIES FUNCTIONS +++++++++++++++++++++++++ */
+
+
+
     /* +++++++++++++++++++++++++ Categories Page +++++++++++++++++++++++++ */
 
 
@@ -173,7 +178,7 @@ class AdminController extends Controller
 
         Category::create($request->all());
 
-        return redirect('/admin/categories')->with('success', 'Category has been created successfully.');
+        return redirect('/admin/categories/create')->with('status', 'Category has been created successfully.');
     }
 
 
@@ -182,22 +187,75 @@ class AdminController extends Controller
 
 
 
-
-
-
     /* +++++++++++++++++++++++++ Edit Category +++++++++++++++++++++++++ */
 
 
 
-
-    public function selectCategoryForEdit()
+    public function editCategory($id)
     {
-        return view('Admin.Admins.admins');
+        $category = Category::find($id);
+        return view('Admin.Categories.editCategory', compact('category'));
     }
 
 
 
     /* ------------------------- Edit Category ------------------------- */
+
+
+
+    /* +++++++++++++++++++++++++ Update Category +++++++++++++++++++++++++ */
+
+
+
+    public function updateCategory(Request $request, $id)
+    {
+        $this->validate(
+            $request,
+            [
+                'name' => ['required', 'max:100', Rule::unique('categories')->ignore($id)],
+                'lang2_Name' => ['required', 'max:100', Rule::unique('categories')->ignore($id)],
+                'lang3_Name' => ['required', 'max:100', Rule::unique('categories')->ignore($id)]
+                // 'arName' => array('required','max:100', "regex:/^[\p{Arabic}\s\p{N}]+$/")
+            ],
+            [
+                'lang2_Name.max' => 'The max amount of characters for the language 2 category name is 100!',
+                'lang2_Name.unique' => 'The language 2 category name is already used',
+                'lang3_Name.max' => 'The max amount of characters for the language 3 category name is 100!',
+                'lang3_Name.unique' => 'The language 3 category name is already used'
+            ]
+        );
+        $category = Category::find($id);
+        $category->name = $request->name;
+        $category->lang2_Name = $request->lang2_Name;
+        $category->lang3_Name = $request->lang3_Name;
+        $category->save();
+
+        return redirect('/admin/categories/edit/' . $id)->with('status', 'Category has been edited successfully.');
+    }
+
+
+
+    /* ------------------------- Update Category ------------------------- */
+
+
+
+    /* +++++++++++++++++++++++++ Delete Category +++++++++++++++++++++++++ */
+
+
+
+    public function deleteCategory($id)
+    {
+        $category = Category::findOrFail($id);
+        return view('Admin.Categories.editCategory', compact('category'));
+    }
+
+
+
+    /* ------------------------- Delete Category ------------------------- */
+
+
+
+    /* ------------------------- ALL CATEGORIES FUNCTIONS ------------------------- */
 
 
 
