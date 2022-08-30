@@ -149,12 +149,15 @@ class AdminController extends Controller
             $request,
             [
                 'name' => 'required|max:100|unique:categories,name',
-                'lang2_Name' => 'required|max:100|unique:categories,lang2_Name'
+                'lang2_Name' => 'required|max:100|unique:categories,lang2_Name',
+                'lang3_Name' => 'required|max:100|unique:categories,lang2_Name'
                 // 'arName' => array('required','max:100', "regex:/^[\p{Arabic}\s\p{N}]+$/")
             ],
             [
                 'lang2_Name.max' => 'The max amount of characters for the arabic category name is 100!',
-                'lang2_Name.unique' => 'The Arabic category name is already used'
+                'lang2_Name.unique' => 'The Arabic category name is already used',
+                'lang3_Name.max' => 'The max amount of characters for the arabic category name is 100!',
+                'lang3_Name.unique' => 'The Arabic category name is already used'
             ]
         );
 
