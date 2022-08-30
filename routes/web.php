@@ -147,6 +147,18 @@ Route::controller(AdminController::class)->prefix("admin")->name("admin.")->grou
 
 
 
+    /* +++++++++++++++++++++++++ Delete a Category +++++++++++++++++++++++++ */
+
+
+
+    Route::delete('/categories/delete/{id}', 'deleteCategory')->name("categories.delete");
+
+
+
+    /* ------------------------- Delete a Category ------------------------- */
+
+
+
     /* ------------------------- categories Routes ------------------------- */
 
 

@@ -178,7 +178,8 @@ class AdminController extends Controller
 
         Category::create($request->all());
 
-        return redirect('/admin/categories/create')->with('status', 'Category has been created successfully.');
+        // return redirect('/admin/categories/create')->with('status', 'Category has been created successfully.');
+        return redirect('/admin/categories')->with('status', 'Category has been created successfully.');
     }
 
 
@@ -230,7 +231,8 @@ class AdminController extends Controller
         $category->lang3_Name = $request->lang3_Name;
         $category->save();
 
-        return redirect('/admin/categories/edit/' . $id)->with('status', 'Category has been edited successfully.');
+        // return redirect('/admin/categories/edit/' . $id)->with('status', 'Category has been edited successfully.');
+        return redirect('/admin/categories/')->with('status', 'Category has been edited successfully.');
     }
 
 
@@ -246,7 +248,8 @@ class AdminController extends Controller
     public function deleteCategory($id)
     {
         $category = Category::findOrFail($id);
-        return view('Admin.Categories.editCategory', compact('category'));
+        $category->delete();
+        return redirect('/admin/categories/')->with('status', 'Category has been Deleted successfully.');
     }
 
 
