@@ -53,10 +53,10 @@
                     @foreach ($projects as $project)
                         <tr>
                             <th>{{ $project->id }}</th>
-                            <td>{{ $project->name }}</td>
+                            <td>{{ $project->title }}</td>
                             <td>{{ $project->lang2_Title }}</td>
                             <td>{{ $project->lang3_Title }}</td>
-                            <td>{{ $project->category }}</td>
+                            <td>{{ $project->category->name }}</td>
                             <td><a class="btn btn-secondary" href="">Manage Photos</a></td>
                             <td><a class="btn btn-secondary" href="">Show</a></td>
                             <td>

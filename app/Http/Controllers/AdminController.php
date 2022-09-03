@@ -224,7 +224,7 @@ class AdminController extends Controller
     public function createProject()
     {
         $categories = Category::all();
-        return view('Admin.projects.createProject',compact('categories'));
+        return view('Admin.projects.createProject', compact('categories'));
     }
 
 
@@ -241,10 +241,18 @@ class AdminController extends Controller
     {
         $request->validate(
             [
-                'category_id' => 'exists:categories,id'
+                'title' => 'required|max:100|unique:projects,title',
+                'lang2_title' => 'max:100|unique:projects,lang2_title',
+                'lang3_title' => 'max:100|unique:projects,lang3_title',
+                'subtitle' => 'required|max:250',
+                'content' => 'required',
+                'date' => 'required',
+                'category_id' => 'exists:categories,id',
+
+
             ],
             [
-                'category_id.exists' => 'teez',
+                // 'category_id.exists' => 'teez',
             ]
         );
         // dd($request->all());
@@ -252,12 +260,12 @@ class AdminController extends Controller
         $project = new Project();
 
         $project->title = $request->title;
-        $project->lang2_title = $request->lang2_title;
-        $project->lang3_title = $request->lang3_title;
+        $project->lang2_Title = $request->lang2_Title;
+        $project->lang3_Title = $request->lang3_Title;
 
         $project->subtitle = $request->subtitle;
-        $project->lang2_subtitle = $request->lang2_subtitle;
-        $project->lang3_subtitle = $request->lang3_subtitle;
+        $project->lang2_Subtitle = $request->lang2_Subtitle;
+        $project->lang3_Subtitle = $request->lang3_Subtitle;
 
         $project->content = $request->content;
         $project->lang2_Content = $request->lang2_Content;
@@ -273,13 +281,42 @@ class AdminController extends Controller
         $project->lang2_thumbnail_alt = $request->lang2_thumbnail_alt;
         $project->lang3_thumbnail_alt = $request->lang3_thumbnail_alt;
 
-        $project->meta_title = $request->meta_title;
-        $project->meta_title = $request->lang2_meta_Title;
-        $project->meta_title = $request->lang3_meta_Title;
+        $companyName="EDG";
+        $companyLang2Name="ادج";
+        $companyLang3Name="IDG";
 
-        $project->meta_description = $request->meta_description;
-        $project->meta_description = $request->lang2_meta_description;
-        $project->meta_description = $request->lang3_meta_description;
+        if (empty($request->meta_title)) {
+            $project->meta_title = $request->title . $companyName;
+        } else {
+            $project->meta_title = $request->meta_title;
+        }
+        if (empty($request->lang2_meta_Title)) {
+            $project->lang2_meta_Title = $request->lang2_Title . $companyLang2Name;
+        } else {
+            $project->lang2_meta_Title = $request->lang2_meta_Title;
+        }
+        if (empty($request->lang3_meta_Title)) {
+            $project->lang3_meta_Title = $request->lang3_Title . $companyLang3Name;
+        } else {
+            $project->lang3_meta_Title = $request->lang3_meta_Title;
+        }
+
+
+        if (empty($request->meta_description)) {
+            $project->meta_description = $request->subtitle . $companyName;
+        } else {
+            $project->meta_description = $request->meta_description;
+        }
+        if (empty($request->lang2_meta_description)) {
+            $project->lang2_meta_description = $request->lang2_Subtitle . $companyLang2Name;
+        } else {
+            $project->lang2_meta_description = $request->lang2_meta_Title;
+        }
+        if (empty($request->lang3_meta_description)) {
+            $project->lang3_meta_description = $request->lang3_Subtitle . $companyLang3Name;
+        } else {
+            $project->lang3_meta_description = $request->lang3_meta_Title;
+        }
 
         $project->save();
         return redirect('/admin/projects')->with('status', 'Project has been created successfully');
