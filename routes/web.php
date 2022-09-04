@@ -67,45 +67,6 @@ Route::controller(AdminController::class)->prefix("admin")->name("admin.")->grou
 
 
 
-    /* +++++++++++++++++++++++++ Projects Routes +++++++++++++++++++++++++ */
-
-
-
-    Route::prefix('projects')->name('projects.')->group(function () {
-
-        Route::get('', 'projects')->name("projects");
-
-
-
-        /* +++++++++++++++++++++++++ Create Project Routes +++++++++++++++++++++++++ */
-
-
-
-        Route::get('create', 'createProject')->name("create");
-
-
-
-        /* ------------------------- Create Project Routes ------------------------- */
-
-
-
-        /* +++++++++++++++++++++++++ Create Project Routes +++++++++++++++++++++++++ */
-
-
-
-        Route::post('store', 'storeProject')->name("store");
-
-
-
-        /* ------------------------- Create Project Routes ------------------------- */
-    });
-
-
-
-    /* ------------------------- Projects Routes ------------------------- */
-
-
-
     /* +++++++++++++++++++++++++ categories Routes +++++++++++++++++++++++++ */
 
 
@@ -168,7 +129,7 @@ Route::controller(AdminController::class)->prefix("admin")->name("admin.")->grou
 
 
 
-        Route::delete('/delete/{id}', 'deleteCategory')->name("delete");
+        Route::delete('delete/{id}', 'deleteCategory')->name("delete");
 
 
 
@@ -178,6 +139,81 @@ Route::controller(AdminController::class)->prefix("admin")->name("admin.")->grou
 
 
     /* ------------------------- categories Routes ------------------------- */
+
+
+
+    /* +++++++++++++++++++++++++ Projects Routes +++++++++++++++++++++++++ */
+
+
+
+    Route::prefix('projects')->name('projects.')->group(function () {
+
+        Route::get('', 'projects')->name("projects");
+
+
+
+        /* +++++++++++++++++++++++++ Create Project Route +++++++++++++++++++++++++ */
+
+
+
+        Route::get('create', 'createProject')->name("create");
+
+
+
+        /* ------------------------- Create Project Route ------------------------- */
+
+
+
+        /* +++++++++++++++++++++++++ Store Project Route +++++++++++++++++++++++++ */
+
+
+
+        Route::post('store', 'storeProject')->name("store");
+
+
+
+        /* ------------------------- Store Project Routes ------------------------- */
+
+
+
+        /* +++++++++++++++++++++++++ Edit Project Route +++++++++++++++++++++++++ */
+
+
+
+        Route::get('edit/{id}', 'editProject')->name("edit");
+
+
+
+        /* ------------------------- Edit Project Routes ------------------------- */
+
+
+
+        /* +++++++++++++++++++++++++ Update Project Route +++++++++++++++++++++++++ */
+
+
+
+        Route::put('update/{id}', 'updateProject')->name("update");
+
+
+
+        /* ------------------------- Update Project Routes ------------------------- */
+
+
+
+        /* +++++++++++++++++++++++++ Delete Project +++++++++++++++++++++++++ */
+
+
+
+        Route::delete('delete/{id}', 'deleteProject')->name("delete");
+
+
+
+        /* ------------------------- Delete Project ------------------------- */
+    });
+
+
+
+    /* ------------------------- Projects Routes ------------------------- */
 
 
 

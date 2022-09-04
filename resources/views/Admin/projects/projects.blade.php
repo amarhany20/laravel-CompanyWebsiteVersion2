@@ -66,7 +66,7 @@
                                     @csrf
                                     @method('DELETE')
                                     <input type="submit"
-                                        onclick="return confirm('Are you sure you want to delete this project? It will delete all projects linked to it!');"
+                                        onclick="return confirm('Are you sure you want to delete this project?');"
                                         class="btn btn-danger" value="Delete">
                                 </form>
                             </td>

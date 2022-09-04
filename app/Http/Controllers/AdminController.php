@@ -22,6 +22,19 @@ class AdminController extends Controller
 
 
 
+    /* +++++++++++++++++++++++++ Public Variables +++++++++++++++++++++++++ */
+
+
+
+    private $companyName = "EDG";
+    private $companyLang2Name = "ادج";
+    private $companyLang3Name = "IDG";
+
+
+
+    /* ------------------------- Public Variables ------------------------- */
+
+
     /* +++++++++++++++++++++++++ Admin Menu +++++++++++++++++++++++++ */
 
 
@@ -242,8 +255,8 @@ class AdminController extends Controller
         $request->validate(
             [
                 'title' => 'required|max:100|unique:projects,title',
-                'lang2_title' => 'max:100|unique:projects,lang2_title',
-                'lang3_title' => 'max:100|unique:projects,lang3_title',
+                'lang2_title' => 'max:100|unique:projects,lang2_Title',
+                'lang3_title' => 'max:100|unique:projects,lang3_Title',
                 'subtitle' => 'required|max:250',
                 'content' => 'required',
                 'date' => 'required',
@@ -252,7 +265,7 @@ class AdminController extends Controller
 
             ],
             [
-                // 'category_id.exists' => 'teez',
+                // 'category_id.exists' => 'okay bad',
             ]
         );
         // dd($request->all());
@@ -275,47 +288,45 @@ class AdminController extends Controller
 
         $project->date = $request->date;
 
-        $project->thumbnail_url = "Empty for now";
+        $project->Thumbnail_Url = "Empty for now";
 
-        $project->thumbnail_alt = $request->thumbnail_alt;
-        $project->lang2_thumbnail_alt = $request->lang2_thumbnail_alt;
-        $project->lang3_thumbnail_alt = $request->lang3_thumbnail_alt;
+        $project->thumbnail_Alt = $request->thumbnail_Alt;
+        $project->lang2_Thumbnail_Alt = $request->lang2_Thumbnail_Alt;
+        $project->lang3_Thumbnail_Alt = $request->lang3_Thumbnail_Alt;
 
-        $companyName="EDG";
-        $companyLang2Name="ادج";
-        $companyLang3Name="IDG";
 
-        if (empty($request->meta_title)) {
-            $project->meta_title = $request->title . $companyName;
+
+        if (empty($request->meta_Title)) {
+            $project->meta_Title = $request->title . $this->companyName;
         } else {
-            $project->meta_title = $request->meta_title;
+            $project->meta_Title = $request->meta_Title;
         }
-        if (empty($request->lang2_meta_Title)) {
-            $project->lang2_meta_Title = $request->lang2_Title . $companyLang2Name;
+        if (empty($request->lang2_Meta_Title)) {
+            $project->lang2_Meta_Title = $request->lang2_Title . $this->companyLang2Name;
         } else {
-            $project->lang2_meta_Title = $request->lang2_meta_Title;
+            $project->lang2_Meta_Title = $request->lang2_Meta_Title;
         }
-        if (empty($request->lang3_meta_Title)) {
-            $project->lang3_meta_Title = $request->lang3_Title . $companyLang3Name;
+        if (empty($request->lang3_Meta_Title)) {
+            $project->lang3_Meta_Title = $request->lang3_Title . $this->companyLang3Name;
         } else {
-            $project->lang3_meta_Title = $request->lang3_meta_Title;
+            $project->lang3_Meta_Title = $request->lang3_Meta_Title;
         }
 
 
-        if (empty($request->meta_description)) {
-            $project->meta_description = $request->subtitle . $companyName;
+        if (empty($request->meta_Description)) {
+            $project->meta_Description = $request->subtitle . $this->companyName;
         } else {
-            $project->meta_description = $request->meta_description;
+            $project->meta_Description = $request->meta_Description;
         }
-        if (empty($request->lang2_meta_description)) {
-            $project->lang2_meta_description = $request->lang2_Subtitle . $companyLang2Name;
+        if (empty($request->lang2_Meta_Description)) {
+            $project->lang2_Meta_Description = $request->lang2_Subtitle . $this->companyLang2Name;
         } else {
-            $project->lang2_meta_description = $request->lang2_meta_Title;
+            $project->lang2_Meta_Description = $request->lang2_Meta_Title;
         }
-        if (empty($request->lang3_meta_description)) {
-            $project->lang3_meta_description = $request->lang3_Subtitle . $companyLang3Name;
+        if (empty($request->lang3_Meta_Description)) {
+            $project->lang3_Meta_Description = $request->lang3_Subtitle . $this->companyLang3Name;
         } else {
-            $project->lang3_meta_description = $request->lang3_meta_Title;
+            $project->lang3_Meta_Description = $request->lang3_Meta_Title;
         }
 
         $project->save();
@@ -327,6 +338,128 @@ class AdminController extends Controller
     /* ------------------------- Store Created Project ------------------------- */
 
 
+
+    /* +++++++++++++++++++++++++ Edit Project +++++++++++++++++++++++++ */
+
+
+
+    public function editProject($id)
+    {
+
+        $project = Project::find($id);
+        $categories = Category::all();
+        return view('Admin.projects.editProject', compact('project','categories'));
+
+    }
+
+
+
+    /* ------------------------- Edit Project ------------------------- */
+
+
+
+    /* +++++++++++++++++++++++++ Update Project +++++++++++++++++++++++++ */
+
+
+
+    public function updateProject(Request $request, $id)
+    {
+        $request->validate(
+            [
+                'title' => 'required|max:100|unique:projects,title',
+                'lang2_Title' => 'max:100|unique:projects,lang2_Title',
+                'lang3_Title' => 'max:100|unique:projects,lang3_Title',
+                'subtitle' => 'required|max:250',
+                'content' => 'required',
+                'date' => 'required',
+                'category_id' => 'exists:categories,id',
+
+
+            ],
+            [
+                // 'category_id.exists' => 'okay bad',
+            ]
+        );
+        $project = Category::find($id);
+        $project->title = $request->title;
+        $project->lang2_Title = $request->lang2_Title;
+        $project->lang3_Title = $request->lang3_Title;
+
+        $project->subtitle = $request->subtitle;
+        $project->lang2_Subtitle = $request->lang2_Subtitle;
+        $project->lang3_Subtitle = $request->lang3_Subtitle;
+
+        $project->content = $request->content;
+        $project->lang2_Content = $request->lang2_Content;
+        $project->lang3_Content = $request->lang3_Content;
+
+        $project->category_id = $request->category_id;
+
+        $project->date = $request->date;
+
+        $project->Thumbnail_Url = "Empty for now";
+
+        $project->thumbnail_Alt = $request->thumbnail_Alt;
+        $project->lang2_Thumbnail_Alt = $request->lang2_Thumbnail_Alt;
+        $project->lang3_Thumbnail_Alt = $request->lang3_Thumbnail_Alt;
+
+        if (empty($request->meta_Title)) {
+            $project->meta_Title = $request->title . $this->companyName;
+        } else {
+            $project->meta_Title = $request->meta_Title;
+        }
+        if (empty($request->lang2_Meta_Title)) {
+            $project->lang2_Meta_Title = $request->lang2_Title . $this->companyLang2Name;
+        } else {
+            $project->lang2_Meta_Title = $request->lang2_Meta_Title;
+        }
+        if (empty($request->lang3_Meta_Title)) {
+            $project->lang3_Meta_Title = $request->lang3_Title . $this->companyLang3Name;
+        } else {
+            $project->lang3_Meta_Title = $request->lang3_Meta_Title;
+        }
+
+
+        if (empty($request->meta_Description)) {
+            $project->meta_Description = $request->subtitle . $this->companyName;
+        } else {
+            $project->meta_Description = $request->meta_Description;
+        }
+        if (empty($request->lang2_Meta_Description)) {
+            $project->lang2_Meta_Description = $request->lang2_Subtitle . $this->companyLang2Name;
+        } else {
+            $project->lang2_Meta_Description = $request->lang2_Meta_Title;
+        }
+        if (empty($request->lang3_Meta_Description)) {
+            $project->lang3_Meta_Description = $request->lang3_Subtitle . $this->companyLang3Name;
+        } else {
+            $project->lang3_Meta_Description = $request->lang3_Meta_Title;
+        }
+
+        $project->save();
+        return redirect('/admin/projects')->with('status', 'Project has been Updated successfully');
+    }
+
+
+
+    /* ------------------------- Update Project ------------------------- */
+
+
+
+    /* +++++++++++++++++++++++++ Delete Project +++++++++++++++++++++++++ */
+
+
+
+    public function deleteProject($id)
+    {
+        $category = Category::findOrFail($id);
+        $category->delete();
+        return redirect('/admin/projects/')->with('status', 'Project has been Deleted successfully.');
+    }
+
+
+
+    /* ------------------------- Delete Project ------------------------- */
 
 
 

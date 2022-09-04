@@ -26,16 +26,16 @@ return new class extends Migration
             $table->string('lang3_Content', 2000)->nullable();
             $table->foreignId('category_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
             $table->date('date');
-            $table->string('thumbnail_url');
-            $table->string('thumbnail_alt')->nullable();
-            $table->string('lang2_thumbnail_alt')->nullable();
-            $table->string('lang3_thumbnail_alt')->nullable();
+            $table->string('thumbnail_Url');
+            $table->string('thumbnail_Alt')->nullable();
+            $table->string('lang2_Thumbnail_Alt')->nullable();
+            $table->string('lang3_Thumbnail_Alt')->nullable();
             $table->string('meta_Title')->nullable();
-            $table->string('lang2_meta_Title')->nullable();
-            $table->string('lang3_meta_Title')->nullable();
-            $table->string('meta_description')->nullable();
-            $table->string('lang2_meta_description')->nullable();
-            $table->string('lang3_meta_description')->nullable();
+            $table->string('lang2_Meta_Title')->nullable();
+            $table->string('lang3_Meta_Title')->nullable();
+            $table->string('meta_Description')->nullable();
+            $table->string('lang2_Meta_Description')->nullable();
+            $table->string('lang3_Meta_Description')->nullable();
             $table->boolean('is_Shown')->default(true);
 
             $table->timestamps();
