@@ -380,7 +380,7 @@ class AdminController extends Controller
                 // 'category_id.exists' => 'okay bad',
             ]
         );
-        $project = Category::find($id);
+        $project = Project::find($id);
         $project->title = $request->title;
         $project->lang2_Title = $request->lang2_Title;
         $project->lang3_Title = $request->lang3_Title;
@@ -452,8 +452,8 @@ class AdminController extends Controller
 
     public function deleteProject($id)
     {
-        $category = Category::findOrFail($id);
-        $category->delete();
+        $project = Project::findOrFail($id);
+        $project->delete();
         return redirect('/admin/projects/')->with('status', 'Project has been Deleted successfully.');
     }
 

@@ -5,7 +5,7 @@
 
 @section('content')
     <div class="container mt-3">
-        <h1 class="text-center mb-3">Edit Category</h1>
+        <h1 class="text-center mb-3">Edit Project</h1>
 
         <a class="btn btn-dark text-decoration-none mb-3" href="/admin/categories"><i class="bi bi-arrow-90deg-left"></i>
             Back</a>
@@ -29,7 +29,7 @@
         @endif
 
 
-        <form method="POST" action="{{ url('admin/categories/update/' . $project->id) }}">
+        <form method="POST" action="{{ url('admin/projects/update/' . $project->id) }}">
             @csrf
             @method('PUT')
 
