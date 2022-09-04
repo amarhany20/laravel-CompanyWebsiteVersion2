@@ -3,6 +3,8 @@
 @section('content')
     <div class="container mt-3">
         <h1 class="text-center mb-3">All Categories</h1>
+        <a class="btn btn-dark text-decoration-none mb-3" href="/admin/projects"><i class="bi bi-arrow-90deg-left"></i>
+            Back</a>
 
         @if (session('status'))
             <div class="alert alert-success">
@@ -53,14 +55,17 @@
                             <td>
                                 <a class="btn btn-light"
                                     href="{{ url('/admin/categories/edit/' . $category->id) }}">Edit</a>
-                                <form class="d-inline" action="{{ url('/admin/categories/delete/'.$category->id) }}" method="POST">
+                                <form class="d-inline" action="{{ url('/admin/categories/delete/' . $category->id) }}"
+                                    method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <input type="submit" onclick="return confirm('Are you sure you want to delete this Category? It will delete all projects linked to it!');" class="btn btn-danger" value="Delete">
+                                    <input type="submit"
+                                        onclick="return confirm('Are you sure you want to delete this Category? It will delete all projects linked to it!');"
+                                        class="btn btn-danger" value="Delete">
                                 </form>
                             </td>
                         </tr>
-                        @endforeach
+                    @endforeach
                 </tbody>
                 <tfoot>
 
