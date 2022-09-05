@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Project extends Model
 {
@@ -13,6 +14,13 @@ class Project extends Model
 
     public function category(){
         return $this->belongsTo(Category::class);
+    }
+    public function getNextId()
+    {
+
+        $statement = DB::select("show table status like 'projects'");
+
+        return $statement[0]->Auto_increment;
     }
 
 }

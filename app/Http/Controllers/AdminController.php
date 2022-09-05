@@ -6,6 +6,7 @@ use App\Models\Project;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
 {
@@ -255,12 +256,14 @@ class AdminController extends Controller
         $request->validate(
             [
                 'title' => 'required|max:100|unique:projects,title',
-                'lang2_title' => 'max:100|unique:projects,lang2_Title',
-                'lang3_title' => 'max:100|unique:projects,lang3_Title',
+                'lang2_title' => 'nullable|max:100|unique:projects,lang2_Title',
+                'lang3_title' => 'nullable|max:100|unique:projects,lang3_Title',
                 'subtitle' => 'required|max:250',
                 'content' => 'required',
                 'date' => 'required',
                 'category_id' => 'exists:categories,id',
+                'thumbnail_Url' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:10240',
+                // 'thumbnail_Alt' => Rule::requiredIf($request->thumbnail_Url),
 
 
             ],
@@ -270,6 +273,9 @@ class AdminController extends Controller
         );
         // dd($request->all());
         // dd($request->input());
+        // dump($request->hasFile('thumbnail_Url'));
+        // die;
+
         $project = new Project();
 
         $project->title = $request->title;
@@ -288,13 +294,29 @@ class AdminController extends Controller
 
         $project->date = $request->date;
 
-        $project->Thumbnail_Url = "Empty for now";
+        // $project->thumbnail_Url = $request->file('thumbnail_Url')->storeAs('public/thumbnails',$request->id . $request->title . $request->file('thumbnail_Url')->guessExtension());
+        if ($request->hasFile('thumbnail_Url')) {
+            $project->thumbnail_Url = $request->file('thumbnail_Url')->storeAs('public/thumbnails', $project->getNextId() . $request->title . '.' . $request->file('thumbnail_Url')->extension());
+        } else {
+            // $project->thumbnail_Url = "test No Photo";
+        }
 
-        $project->thumbnail_Alt = $request->thumbnail_Alt;
-        $project->lang2_Thumbnail_Alt = $request->lang2_Thumbnail_Alt;
-        $project->lang3_Thumbnail_Alt = $request->lang3_Thumbnail_Alt;
 
-
+        if (empty($request->thumbnail_Alt)) {
+            $project->thumbnail_Alt = $request->title;
+        } else {
+            $project->thumbnail_Alt = $request->thumbnail_Alt;
+        }
+        if (empty($request->lang2_Thumbnail_Alt)) {
+            $project->lang2_Thumbnail_Alt = $request->lang2_Title;
+        } else {
+            $project->lang2_Thumbnail_Alt = $request->lang2_Thumbnail_Alt;
+        }
+        if (empty($request->lang3_Thumbnail_Alt)) {
+            $project->lang3_Thumbnail_Alt = $request->lang3_Title;
+        } else {
+            $project->lang3_Thumbnail_Alt = $request->lang3_Thumbnail_Alt;
+        }
 
         if (empty($request->meta_Title)) {
             $project->meta_Title = $request->title . $this->companyName;
@@ -348,8 +370,7 @@ class AdminController extends Controller
 
         $project = Project::find($id);
         $categories = Category::all();
-        return view('Admin.projects.editProject', compact('project','categories'));
-
+        return view('Admin.projects.editProject', compact('project', 'categories'));
     }
 
 
@@ -366,13 +387,14 @@ class AdminController extends Controller
     {
         $request->validate(
             [
-                'title' => 'required|max:100|unique:projects,title',
-                'lang2_Title' => 'max:100|unique:projects,lang2_Title',
-                'lang3_Title' => 'max:100|unique:projects,lang3_Title',
+                'title' => 'required|max:100|unique:projects,title,' . $id,
+                'lang2_Title' => 'nullable|max:100|unique:projects,lang2_Title,' . $id,
+                'lang3_Title' => 'nullable|max:100|unique:projects,lang3_Title,' . $id,
                 'subtitle' => 'required|max:250',
                 'content' => 'required',
                 'date' => 'required',
                 'category_id' => 'exists:categories,id',
+                'thumbnail_Url' => 'nullable|image|mimes:jpg,png,jpeg,gif,svg|max:10240',
 
 
             ],
@@ -397,11 +419,29 @@ class AdminController extends Controller
 
         $project->date = $request->date;
 
-        $project->Thumbnail_Url = "Empty for now";
 
-        $project->thumbnail_Alt = $request->thumbnail_Alt;
-        $project->lang2_Thumbnail_Alt = $request->lang2_Thumbnail_Alt;
-        $project->lang3_Thumbnail_Alt = $request->lang3_Thumbnail_Alt;
+        if ($request->hasFile('thumbnail_Url')) {
+            if ($project->thumbnail_Url) {
+                Storage::delete($project->thumbnail_Url);
+            }
+            $project->thumbnail_Url = $request->file('thumbnail_Url')->storeAs('public/thumbnails', $project->getNextId() . $request->title . '.' . $request->file('thumbnail_Url')->extension());
+        }
+
+        if (empty($request->thumbnail_Alt)) {
+            $project->thumbnail_Alt = $request->title;
+        } else {
+            $project->thumbnail_Alt = $request->thumbnail_Alt;
+        }
+        if (empty($request->lang2_Thumbnail_Alt)) {
+            $project->lang2_Thumbnail_Alt = $request->lang2_Title;
+        } else {
+            $project->lang2_Thumbnail_Alt = $request->lang2_Thumbnail_Alt;
+        }
+        if (empty($request->lang3_Thumbnail_Alt)) {
+            $project->lang3_Thumbnail_Alt = $request->lang3_Title;
+        } else {
+            $project->lang3_Thumbnail_Alt = $request->lang3_Thumbnail_Alt;
+        }
 
         if (empty($request->meta_Title)) {
             $project->meta_Title = $request->title . $this->companyName;

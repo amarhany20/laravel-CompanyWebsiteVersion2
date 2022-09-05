@@ -26,7 +26,7 @@
             </div>
         @endif
 
-        <form method="POST" action="{{ url('admin/projects/store') }}">
+        <form method="POST" action="{{ url('admin/projects/store') }}" enctype="multipart/form-data">
             @csrf
 
             <div class="mb-3">
@@ -121,11 +121,11 @@
             </div>
 
             <div class="mb-3">
-                <label for="categorySelect" class="form-label">Language 3 Content</label>
-                <select id="categorySelect" class="form-control" name="category_id">
-                    <option>Select a category</option>
+                <label for="categorySelect" class="form-label">Category</label>
+                <select required id="categorySelect" class="form-control" name="category_id">
+                    <option value="">Select a category</option>
                     @foreach ($categories as $category)
-                        <option value="{{ $category->id }}">
+                        <option value="{{ $category->id }}" {{ (old("category_id") == $category->id ? "selected":"") }}>
                             name: {{ $category->name }} || lang 2 name: {{ $category->lang2_name }} || lang 3 name:
                             {{ $category->lang3_name }} </option>
                     @endforeach
@@ -147,7 +147,7 @@
 
             <div class="mb-3">
                 <label for="Projectdate" class="form-label">Thumbnail Photo</label>
-                empty for now
+                <input type="file" name="thumbnail_Url" class="form-control-file" id="">
                 <div id="ProjectdateHelp" class="form-text"></div>
                 @error('date')
                     <div class="text-danger">{{ $message }}</div>
