@@ -153,10 +153,10 @@
             </div>
 
             <div class="mb-3">
-                <label for="Projectdate" class="form-label">Thumbnail Photo</label>
-                <input type="file" name="thumbnail_Url" class="form-control-file" id="">
-                <div id="ProjectdateHelp" class="form-text"></div>
-                @error('date')
+                <label for="projectThumbnail" class="form-label">Thumbnail Photo</label>
+                <input type="file" name="thumbnail_Url" class="form-control-file" id="projectThumbnail">
+                <div id="projectThumbnailHelp" class="form-text"></div>
+                @error('thumbnail_Url')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>

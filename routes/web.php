@@ -229,80 +229,80 @@ Route::controller(AdminController::class)->prefix("admin")->name("admin.")->grou
 
 
 
-    /* +++++++++++++++++++++++++ Project Images Routes +++++++++++++++++++++++++ */
+    /* +++++++++++++++++++++++++ Project Media Routes +++++++++++++++++++++++++ */
 
 
 
-    Route::prefix('projectimages')->name("projectImages.")->group(function () {
+    Route::prefix('projectmedia')->name("projectMedia.")->group(function () {
 
 
 
-        Route::get('/{id}', 'projectImages')->name("projectImages");
+        Route::get('/all/{projectId}', 'projectMedia')->name("projectMedia");
 
 
 
-        /* +++++++++++++++++++++++++ Create Project Route +++++++++++++++++++++++++ */
+        /* +++++++++++++++++++++++++ Add Project Media +++++++++++++++++++++++++ */
 
 
 
-        Route::get('create', 'addProjectImage')->name("add");
+        Route::get('add', 'addProjectMedia')->name("add");
 
 
 
-        /* ------------------------- Create Project Route ------------------------- */
+        /* ------------------------- Add Project Media ------------------------- */
 
 
 
-        /* +++++++++++++++++++++++++ Store Project Route +++++++++++++++++++++++++ */
+        /* +++++++++++++++++++++++++ Store Project Media +++++++++++++++++++++++++ */
 
 
 
-        Route::post('store', 'storeProjectImage')->name("store");
+        Route::post('store', 'storeProjectMedia')->name("store");
 
 
 
-        /* ------------------------- Store Project Routes ------------------------- */
+        /* ------------------------- Store Project Media ------------------------- */
 
 
 
-        /* +++++++++++++++++++++++++ Edit Project Route +++++++++++++++++++++++++ */
+        /* +++++++++++++++++++++++++ Edit Project Media +++++++++++++++++++++++++ */
 
 
 
-        Route::get('edit/{id}', 'editProjectImage')->name("edit");
+        Route::get('edit/{id}', 'editProjectMedia')->name("edit");
 
 
 
-        /* ------------------------- Edit Project Routes ------------------------- */
+        /* ------------------------- Edit Project Media ------------------------- */
 
 
 
-        /* +++++++++++++++++++++++++ Update Project Route +++++++++++++++++++++++++ */
+        /* +++++++++++++++++++++++++ Update Project Media +++++++++++++++++++++++++ */
 
 
 
-        Route::put('update/{id}', 'updateProjectImage')->name("update");
+        Route::put('update/{id}', 'updateProjectMedia')->name("update");
 
 
 
-        /* ------------------------- Update Project Routes ------------------------- */
+        /* ------------------------- Update Project Media ------------------------- */
 
 
 
-        /* +++++++++++++++++++++++++ Delete Project +++++++++++++++++++++++++ */
+        /* +++++++++++++++++++++++++ Delete Project Media +++++++++++++++++++++++++ */
 
 
 
-        Route::delete('delete/{id}', 'deleteProjectImage')->name("delete");
+        Route::delete('delete/{id}', 'deleteProjectMedia')->name("delete");
 
 
 
-        /* ------------------------- Delete Project ------------------------- */
+        /* ------------------------- Delete Project Media ------------------------- */
     });
 
 
 
-    /* ------------------------- Project Images Routes ------------------------- */
+    /* ------------------------- Project Media Routes ------------------------- */
 
 
 

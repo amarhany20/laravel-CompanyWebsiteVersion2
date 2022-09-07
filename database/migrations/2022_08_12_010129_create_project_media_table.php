@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('project_images', function (Blueprint $table) {
+        Schema::create('project_media', function (Blueprint $table) {
             $table->id();
             $table->string('url');
             $table->string('alt')->nullable();
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('projects_images');
+        Schema::dropIfExists('project_media');
     }
 };

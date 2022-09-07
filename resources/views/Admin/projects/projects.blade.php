@@ -7,6 +7,12 @@
                 {{ session('status') }}
             </div>
         @endif
+
+        @if (session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
         <h1 class="text-center mb-3">All Projects</h1>
 
         <div class="row">
@@ -57,7 +63,7 @@
                             <td>{{ $project->lang2_Title }}</td>
                             <td>{{ $project->lang3_Title }}</td>
                             <td>{{ $project->category->name }}</td>
-                            <td><a class="btn btn-secondary" href="{{ url('/admin/projectimages/' . $project->id) }}">Manage Photos</a></td>
+                            <td><a class="btn btn-secondary" href="{{ url('/admin/projectmedia/all/' . $project->id) }}">Manage Media</a></td>
                             @if ($project->is_Shown)
                                 <td><a class="btn btn-secondary" href="{{ url('/admin/projects/visibility/' . $project->id) }}">Hide</a></td>
                             @else

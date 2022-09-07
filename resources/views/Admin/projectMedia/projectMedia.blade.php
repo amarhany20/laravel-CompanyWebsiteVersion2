@@ -7,7 +7,7 @@
                 {{ session('status') }}
             </div>
         @endif
-        <h1 class="text-center mb-3">All Project Images</h1>
+        <h1 class="text-center mb-3">All Project Media</h1>
 
         <div class="row">
             <div class="col-sm-6 mb-3">
@@ -20,7 +20,7 @@
 
             <div class="col d-flex justify-content-end col-sm-6 mb-3">
 
-                <a class="mb-2 btn btn-primary" href="{{ url('admin/projectimages/create') }}">Add an Image</a>
+                <a class="mb-2 btn btn-primary" href="{{ url('admin/projectmedia/add') }}">Add</a>
 
             </div>
 
@@ -35,24 +35,27 @@
                         <th>ID</th>
                         <th>Image</th>
                         <td>Alt Tag</td>
+                        <td>Project ID</td>
                         <th>Edit | Delete</th>
 
                     </tr>
                 </thead>
                 <tbody>
-                    @if ($projectImages->count() == 0)
+                    @if ($projectMedia->count() == 0)
                         <tr>
                             <td colspan="8">No Images to display.</td>
                         </tr>
                     @endif
-                    @foreach ($projectImages as $image)
+                    @foreach ($projectMedia as $media)
                         <tr>
-                            <th>{{ $image->id }}</th>
-                            <td>{{ $image->alt }}</td>
+                            <th>{{ $media->id }}</th>
+                            <th>{{ $media->url }}</th>
+                            <td>{{ $media->alt }}</td>
+                            <td>{{ $media->project_Id }}</td>
 
                             <td>
-                                <a class="btn btn-light" href="{{ url('/admin/projectimages/edit/' . $project->id) }}">Edit</a>
-                                <form class="d-inline" action="{{ url('/admin/projectimages/delete/' . $project->id) }}"
+                                <a class="btn btn-light" href="{{ url('/admin/projectmedia/edit/' . $media->id) }}">Edit</a>
+                                <form class="d-inline" action="{{ url('/admin/projectmedia/delete/' . $media->id) }}"
                                     method="POST">
                                     @csrf
                                     @method('DELETE')
@@ -68,7 +71,7 @@
 
                 </tfoot>
             </table>
-            {{ $projectImages->links() }}
+            {{ $projectMedia->links() }}
 
         </div>
     </div>

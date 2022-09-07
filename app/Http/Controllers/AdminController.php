@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use App\Models\Category;
 use Illuminate\Http\Request;
-use App\Models\ProjectImage;
+use App\Models\ProjectMedia;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Storage;
 
@@ -165,8 +165,8 @@ class AdminController extends Controller
             $request,
             [
                 'name' => ['required', 'max:100', Rule::unique('categories')->ignore($id)],
-                'lang2_Name' => [ 'max:100', Rule::unique('categories')->ignore($id)],
-                'lang3_Name' => [ 'max:100', Rule::unique('categories')->ignore($id)]
+                'lang2_Name' => ['max:100', Rule::unique('categories')->ignore($id)],
+                'lang3_Name' => ['max:100', Rule::unique('categories')->ignore($id)]
                 // 'arName' => array('required','max:100', "regex:/^[\p{Arabic}\s\p{N}]+$/")
             ],
             [
@@ -224,6 +224,9 @@ class AdminController extends Controller
     public function projects()
     {
         $projects = Project::paginate(10);
+        // session()->flash("error")
+        // dd(session());
+        session()->forget('mediaProjectId'); //I used session in media, so when I go here I need to reset the id
         return view('Admin.projects.projects', compact('projects'));
     }
 
@@ -505,7 +508,7 @@ class AdminController extends Controller
 
 
 
-    /* +++++++++++++++++++++++++ Delete Project +++++++++++++++++++++++++ */
+    /* +++++++++++++++++++++++++ SHOW/HIDE Project Visibility +++++++++++++++++++++++++ */
 
 
 
@@ -524,7 +527,7 @@ class AdminController extends Controller
 
 
 
-    /* ------------------------- Delete Project ------------------------- */
+    /* ------------------------- SHOW/HIDE Project Visibility ------------------------- */
 
 
 
@@ -533,28 +536,72 @@ class AdminController extends Controller
 
 
 
-    /* +++++++++++++++++++++++++ ALL PROJECT IMAGES FUNCTIONS +++++++++++++++++++++++++ */
+    /* +++++++++++++++++++++++++ ALL PROJECT MEDIA FUNCTIONS +++++++++++++++++++++++++ */
 
 
 
-    /* +++++++++++++++++++++++++ Show Images +++++++++++++++++++++++++ */
+    /* +++++++++++++++++++++++++ Show Media +++++++++++++++++++++++++ */
 
 
 
-    public function projectImages($id)
+    public function projectMedia($projectId)
     {
-        $projectImages = [];
-        $projectImages = ProjectImage::where('id', '=' , $id)->paginate(10);
-        return view('Admin.projectImages.projectImages', compact('projectImages'));
+        session(['mediaProjectId' => $projectId]);
+        $projectMedia = ProjectMedia::where('id', '=', $projectId)->paginate(10);
+        return view('Admin.projectMedia.projectMedia', compact('projectMedia'));
     }
 
 
 
-    /* ------------------------- Show Images ------------------------- */
+    /* ------------------------- Show Media ------------------------- */
 
 
 
-    /* ------------------------- ALL PROJECT IMAGES FUNCTIONS ------------------------- */
+    /* +++++++++++++++++++++++++ add Media +++++++++++++++++++++++++ */
+
+
+
+    public function addProjectMedia()
+    {
+        if (session('mediaProjectId') == null) {
+            return redirect('/admin/projects/')->with('error', 'error happened, please choose the project\'s media again!');
+        }
+
+        return view('Admin.projectMedia.addMedia');
+    }
+
+
+
+    /* ------------------------- add Media ------------------------- */
+
+
+
+    public function storeMedia($request){
+        //https://stackoverflow.com/questions/66167672/laravel-how-to-validate-multiple-size-rules-on-same-file-based-on-mime-type
+        //later
+        request()->validate(
+            [
+                'url' => ''
+            ],
+            [
+
+            ]
+        );
+
+    }
+
+
+
+    /* ------------------------- Show Media ------------------------- */
+
+
+
+    /* +++++++++++++++++++++++++ add Media +++++++++++++++++++++++++ */
+
+
+
+
+    /* ------------------------- ALL PROJECT Media FUNCTIONS ------------------------- */
 
 
 
