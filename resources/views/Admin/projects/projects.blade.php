@@ -58,7 +58,12 @@
                             <td>{{ $project->lang3_Title }}</td>
                             <td>{{ $project->category->name }}</td>
                             <td><a class="btn btn-secondary" href="">Manage Photos</a></td>
-                            <td><a class="btn btn-secondary" href="">Show</a></td>
+                            @if ($project->is_Shown)
+                                <td><a class="btn btn-secondary" href="{{ url('/admin/projects/visibility/' . $project->id) }}">Hide</a></td>
+                            @else
+                                <td><a class="btn btn-secondary" href="{{ url('/admin/projects/visibility/' . $project->id) }}">Show</a></td>
+                            @endif
+
                             <td>
                                 <a class="btn btn-light" href="{{ url('/admin/projects/edit/' . $project->id) }}">Edit</a>
                                 <form class="d-inline" action="{{ url('/admin/projects/delete/' . $project->id) }}"

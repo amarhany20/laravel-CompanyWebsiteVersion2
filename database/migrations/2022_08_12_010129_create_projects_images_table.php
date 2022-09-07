@@ -17,9 +17,9 @@ return new class extends Migration
             $table->id();
             $table->string('url');
             $table->string('alt')->nullable();
-            $table->string('lang2_alt')->nullable();
-            $table->string('lang3_alt')->nullable();
-            $table->foreignId('project_id')->constrained('projects')->cascadeOnDelete();
+            $table->string('lang2_Alt')->nullable();
+            $table->string('lang3_Alt')->nullable();
+            $table->foreignId('project_Id')->constrained('projects')->cascadeOnDelete();
             $table->timestamps();
         });
     }

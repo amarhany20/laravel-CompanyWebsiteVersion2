@@ -36,7 +36,7 @@ return new class extends Migration
             $table->string('meta_Description')->nullable();
             $table->string('lang2_Meta_Description')->nullable();
             $table->string('lang3_Meta_Description')->nullable();
-            $table->boolean('is_Shown')->default(true);
+            $table->boolean('is_Shown')->default(false);
 
             $table->timestamps();
         });

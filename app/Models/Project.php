@@ -16,7 +16,7 @@ class Project extends Model
         return $this->belongsTo(Category::class);
     }
     public function projectImages(){
-        return $this->hasMany(ProjectImages::class);
+        return $this->hasMany(ProjectImage::class);
     }
     public function getNextId()
     {

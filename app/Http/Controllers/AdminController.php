@@ -350,6 +350,7 @@ class AdminController extends Controller
         } else {
             $project->lang3_Meta_Description = $request->lang3_Meta_Title;
         }
+        $project->is_Shown = false;
 
         $project->save();
         return redirect('/admin/projects')->with('status', 'Project has been created successfully');
@@ -495,6 +496,29 @@ class AdminController extends Controller
         $project = Project::findOrFail($id);
         $project->delete();
         return redirect('/admin/projects/')->with('status', 'Project has been Deleted successfully.');
+    }
+
+
+
+    /* ------------------------- Delete Project ------------------------- */
+
+
+
+    /* +++++++++++++++++++++++++ Delete Project +++++++++++++++++++++++++ */
+
+
+
+    public function visibility($id)
+    {
+        $project = Project::findOrFail($id);
+        if ($project->is_Shown) {
+            $project->is_Shown = false;
+        } else {
+            $project->is_Shown = true;
+        }
+        $project->update();
+
+        return redirect('/admin/projects/')->with('status', 'Project\'s visibility has been changed successfully.');
     }
 
 

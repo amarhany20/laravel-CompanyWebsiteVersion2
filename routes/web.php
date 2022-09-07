@@ -209,6 +209,18 @@ Route::controller(AdminController::class)->prefix("admin")->name("admin.")->grou
 
 
         /* ------------------------- Delete Project ------------------------- */
+
+
+
+        /* +++++++++++++++++++++++++ Show/Hide Visibility Project +++++++++++++++++++++++++ */
+
+
+
+        Route::get('visibility/{id}', 'visibility')->name("visibility");
+
+
+
+        /* ------------------------- Show/Hide Visibility Project ------------------------- */
     });
 
 
