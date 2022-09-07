@@ -42,7 +42,7 @@
 
             <div class="mb-3">
                 <label for="categoryLang2Name" class="form-label">Language 2 Name</label>
-                <input required name="lang2_Name" type="text" placeholder="Enter Language 2 Name" value="{{ old('lang2_Name') }}"
+                <input name="lang2_Name" type="text" placeholder="Enter Language 2 Name" value="{{ old('lang2_Name') }}"
                     class="form-control" id="categoryLang2Name">
                 <div id="categoryNameHelp" class="form-text"></div>
                 @error('lang2_Name')
@@ -52,7 +52,7 @@
 
             <div class="mb-3">
                 <label for="categoryLang3Name" class="form-label ">Language 3 Name</label>
-                <input required name="lang3_Name" type="text" placeholder="Enter Language 3 Name" value="{{ old('lang3_Name') }}"
+                <input name="lang3_Name" type="text" placeholder="Enter Language 3 Name" value="{{ old('lang3_Name') }}"
                     class="form-control" id="categoryLang3Name">
                 <div id="categoryNameHelp" class="form-text"></div>
                 @error('lang3_Name')

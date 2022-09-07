@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Models\ProjectImage;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Storage;
 
@@ -104,8 +105,8 @@ class AdminController extends Controller
             $request,
             [
                 'name' => 'required|max:100|unique:categories,name',
-                'lang2_Name' => 'required|max:100|unique:categories,lang2_Name',
-                'lang3_Name' => 'required|max:100|unique:categories,lang3_Name'
+                'lang2_Name' => 'max:100|unique:categories,lang2_Name',
+                'lang3_Name' => 'max:100|unique:categories,lang3_Name'
                 // 'arName' => array('required','max:100', "regex:/^[\p{Arabic}\s\p{N}]+$/")
             ],
             [
@@ -164,8 +165,8 @@ class AdminController extends Controller
             $request,
             [
                 'name' => ['required', 'max:100', Rule::unique('categories')->ignore($id)],
-                'lang2_Name' => ['required', 'max:100', Rule::unique('categories')->ignore($id)],
-                'lang3_Name' => ['required', 'max:100', Rule::unique('categories')->ignore($id)]
+                'lang2_Name' => [ 'max:100', Rule::unique('categories')->ignore($id)],
+                'lang3_Name' => [ 'max:100', Rule::unique('categories')->ignore($id)]
                 // 'arName' => array('required','max:100', "regex:/^[\p{Arabic}\s\p{N}]+$/")
             ],
             [
@@ -529,6 +530,31 @@ class AdminController extends Controller
 
 
     /* ------------------------- ALL Projects FUNCTIONS ------------------------- */
+
+
+
+    /* +++++++++++++++++++++++++ ALL PROJECT IMAGES FUNCTIONS +++++++++++++++++++++++++ */
+
+
+
+    /* +++++++++++++++++++++++++ Show Images +++++++++++++++++++++++++ */
+
+
+
+    public function projectImages($id)
+    {
+        $projectImages = [];
+        $projectImages = ProjectImage::where('id', '=' , $id)->paginate(10);
+        return view('Admin.projectImages.projectImages', compact('projectImages'));
+    }
+
+
+
+    /* ------------------------- Show Images ------------------------- */
+
+
+
+    /* ------------------------- ALL PROJECT IMAGES FUNCTIONS ------------------------- */
 
 
 

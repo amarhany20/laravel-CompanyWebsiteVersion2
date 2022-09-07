@@ -7,7 +7,7 @@
                 {{ session('status') }}
             </div>
         @endif
-        <h1 class="text-center mb-3">All Projects</h1>
+        <h1 class="text-center mb-3">All Project Images</h1>
 
         <div class="row">
             <div class="col-sm-6 mb-3">
@@ -20,8 +20,7 @@
 
             <div class="col d-flex justify-content-end col-sm-6 mb-3">
 
-                <a class="mb-2 btn btn-primary" href="{{ url('admin/projects/create') }}">Create a Project</a>
-                <a class="mb-2 mx-2 btn btn-primary" href="{{ url('admin/categories') }}">Categories</a>
+                <a class="mb-2 btn btn-primary" href="{{ url('admin/projectimages/create') }}">Add an Image</a>
 
             </div>
 
@@ -34,39 +33,26 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>English Title</th>
-                        <td>Language 2 Title</td>
-                        <td>Language 3 Title</td>
-                        <th>Category</th>
-                        <th>Photos</th>
-                        <th>Show | Hide</th>
+                        <th>Image</th>
+                        <td>Alt Tag</td>
                         <th>Edit | Delete</th>
 
                     </tr>
                 </thead>
                 <tbody>
-                    @if ($projects->count() == 0)
+                    @if ($projectImages->count() == 0)
                         <tr>
-                            <td colspan="8">No Projects to display.</td>
+                            <td colspan="8">No Images to display.</td>
                         </tr>
                     @endif
-                    @foreach ($projects as $project)
+                    @foreach ($projectImages as $image)
                         <tr>
-                            <th>{{ $project->id }}</th>
-                            <td>{{ $project->title }}</td>
-                            <td>{{ $project->lang2_Title }}</td>
-                            <td>{{ $project->lang3_Title }}</td>
-                            <td>{{ $project->category->name }}</td>
-                            <td><a class="btn btn-secondary" href="{{ url('/admin/projectimages/' . $project->id) }}">Manage Photos</a></td>
-                            @if ($project->is_Shown)
-                                <td><a class="btn btn-secondary" href="{{ url('/admin/projects/visibility/' . $project->id) }}">Hide</a></td>
-                            @else
-                                <td><a class="btn btn-secondary" href="{{ url('/admin/projects/visibility/' . $project->id) }}">Show</a></td>
-                            @endif
+                            <th>{{ $image->id }}</th>
+                            <td>{{ $image->alt }}</td>
 
                             <td>
-                                <a class="btn btn-light" href="{{ url('/admin/projects/edit/' . $project->id) }}">Edit</a>
-                                <form class="d-inline" action="{{ url('/admin/projects/delete/' . $project->id) }}"
+                                <a class="btn btn-light" href="{{ url('/admin/projectimages/edit/' . $project->id) }}">Edit</a>
+                                <form class="d-inline" action="{{ url('/admin/projectimages/delete/' . $project->id) }}"
                                     method="POST">
                                     @csrf
                                     @method('DELETE')
@@ -82,7 +68,7 @@
 
                 </tfoot>
             </table>
-            {{ $projects->links() }}
+            {{ $projectImages->links() }}
 
         </div>
     </div>

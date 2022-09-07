@@ -229,6 +229,83 @@ Route::controller(AdminController::class)->prefix("admin")->name("admin.")->grou
 
 
 
+    /* +++++++++++++++++++++++++ Project Images Routes +++++++++++++++++++++++++ */
+
+
+
+    Route::prefix('projectimages')->name("projectImages.")->group(function () {
+
+
+
+        Route::get('/{id}', 'projectImages')->name("projectImages");
+
+
+
+        /* +++++++++++++++++++++++++ Create Project Route +++++++++++++++++++++++++ */
+
+
+
+        Route::get('create', 'addProjectImage')->name("add");
+
+
+
+        /* ------------------------- Create Project Route ------------------------- */
+
+
+
+        /* +++++++++++++++++++++++++ Store Project Route +++++++++++++++++++++++++ */
+
+
+
+        Route::post('store', 'storeProjectImage')->name("store");
+
+
+
+        /* ------------------------- Store Project Routes ------------------------- */
+
+
+
+        /* +++++++++++++++++++++++++ Edit Project Route +++++++++++++++++++++++++ */
+
+
+
+        Route::get('edit/{id}', 'editProjectImage')->name("edit");
+
+
+
+        /* ------------------------- Edit Project Routes ------------------------- */
+
+
+
+        /* +++++++++++++++++++++++++ Update Project Route +++++++++++++++++++++++++ */
+
+
+
+        Route::put('update/{id}', 'updateProjectImage')->name("update");
+
+
+
+        /* ------------------------- Update Project Routes ------------------------- */
+
+
+
+        /* +++++++++++++++++++++++++ Delete Project +++++++++++++++++++++++++ */
+
+
+
+        Route::delete('delete/{id}', 'deleteProjectImage')->name("delete");
+
+
+
+        /* ------------------------- Delete Project ------------------------- */
+    });
+
+
+
+    /* ------------------------- Project Images Routes ------------------------- */
+
+
+
     /* +++++++++++++++++++++++++ Admins Routes +++++++++++++++++++++++++ */
 
 
