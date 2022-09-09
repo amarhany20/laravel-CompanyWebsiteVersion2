@@ -576,18 +576,51 @@ class AdminController extends Controller
 
 
 
-    public function storeMedia($request){
+    public function storeProjectMedia(Request $request)
+    {
         //https://stackoverflow.com/questions/66167672/laravel-how-to-validate-multiple-size-rules-on-same-file-based-on-mime-type
         //later
-        request()->validate(
-            [
-                'url' => ''
-            ],
-            [
+        // $rules = [];
 
-            ]
-        );
+        // $image_max_size = 1024 * 10;
+        // $video_max_size = 1024 * 500;
 
+        // foreach ($request->file('mediaUrl') as $index => $file) {
+
+        //     dd($index);
+        //     if (in_array($file->getMimeType(), ['image/jpg', 'image/jpeg', 'image/png'])) {
+        //         $rules["mediaUrl.$index"] = ["max:$image_max_size"];
+        //     } else if (in_array($file->getMimeType(), ['video/mp4'])) {
+        //         $rules["mediaUrl.$index"] = ["max:$video_max_size"];
+        //     } else {
+
+        //         // Always non-validating => returns error
+        //         $rules["file.$index"] = ['bail', 'mimes:jpg,jpeg,png,mp4'];
+        //     }
+        // }
+
+        // $request->validate($rules);
+        if (session()->has('mediaProjectId')) {
+            $projectId = session('mediaProjectId');
+            $request->validate(
+                [
+                    'mediaUrl' => 'required|mimes:mp4,mov,ogg,qt | max:20000',
+
+                ],
+                [
+                    // 'category_id.exists' => 'okay bad',
+                ]
+            );
+            foreach ($request->file('mediaUrl') as $imagefile) {
+                dd($imagefile);
+
+                $projectMedia = new ProjectMedia();
+                $projectId = session('mediaProjectId');
+                $projectMedia->url = $imagefile->storeAs('public/Images/Project ' . $projectId, $projectMedia->getNextId() . '.' . $imagefile->extension());
+            }
+        } else {
+            return redirect('/admin/projects/')->with('error', 'error happened, please choose the project\'s media again!');
+        }
     }
 
 

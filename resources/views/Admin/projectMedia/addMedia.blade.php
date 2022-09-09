@@ -26,14 +26,14 @@
             </div>
         @endif
 
-        <form method="POST" action="{{ url('admin/projects/store') }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ url('admin/projectmedia/store') }}" enctype="multipart/form-data">
             @csrf
 
             <div class="mb-3">
 
                 <div class="mb-3">
                     <label for="mediaUrl" class="form-label">Add Media</label>
-                    <input type="file" name="url" class="form-control-file" id="mediaUrl" multiple>
+                    <input type="file" name="mediaUrl" class="form-control-file" id="mediaUrl" multiple>
 
                     <div id="mediaUrlHelp" class="form-text"></div>
 
@@ -42,52 +42,7 @@
                     @enderror
 
                 </div>
-
-                <label for="mediaAltTag" class="form-label">Media Alt Tag</label>
-
-                <input required name="alt" placeholder="Enter Media Alt Tag" type="text" value="{{ old('alt') }}"
-                    class="form-control" id="mediaAltTag">
-
-                <div id="mediaAltTagHelp" class="form-text"></div>
-
-                @error('alt')
-                    <div class="text-danger">{{ $message }}</div>
-                @enderror
-
             </div>
-
-            <div class="mb-3">
-
-                <label for="mediaLang2AltTag" class="form-label">Media Language 2 Alt Tag</label>
-
-                <input name="alt" placeholder="Enter Media Language 2 Alt Tag" type="text"
-                    value="{{ old('lang2_Alt') }}" class="form-control" id="mediaLang2AltTag">
-
-                <div id="mediaLang2AltTagHelp" class="form-text"></div>
-
-                @error('lang2_Alt')
-                    <div class="text-danger">{{ $message }}</div>
-                @enderror
-
-            </div>
-
-            <div class="mb-3">
-
-                <label for="mediaLang3AltTag" class="form-label">Media Language 3 Alt Tag</label>
-
-                <input name="alt" placeholder="Enter Media Language 3 Alt Tag" type="text"
-                    value="{{ old('lang3_Alt') }}" class="form-control" id="mediaLang3AltTag">
-
-                <div id="mediaLang3AltTagHelp" class="form-text"></div>
-
-                @error('lang3_Alt')
-                    <div class="text-danger">{{ $message }}</div>
-                @enderror
-
-            </div>
-
-
-
 
             <div class="text-center mt-4">
                 <button type="submit" class="btn btn-primary">Submit</button>
